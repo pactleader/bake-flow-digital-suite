@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Header } from '@/components/Header';
 import { Sidebar } from '@/components/Sidebar';
@@ -70,6 +71,7 @@ const mockInventoryStock: InventoryStockItem[] = [
     locationName: 'Main Warehouse',
     receivedDate: '2025-04-05',
     status: 'available',
+    location: 'Main Warehouse' // Added required location property
   },
   { 
     id: 'stock-002', 
@@ -82,6 +84,7 @@ const mockInventoryStock: InventoryStockItem[] = [
     locationName: 'Main Warehouse',
     receivedDate: '2025-04-10',
     status: 'available',
+    location: 'Main Warehouse' // Added required location property
   },
   { 
     id: 'stock-003', 
@@ -94,6 +97,7 @@ const mockInventoryStock: InventoryStockItem[] = [
     locationName: 'Main Warehouse',
     receivedDate: '2025-04-12',
     status: 'available',
+    location: 'Main Warehouse' // Added required location property
   },
   { 
     id: 'stock-004', 
@@ -106,6 +110,7 @@ const mockInventoryStock: InventoryStockItem[] = [
     locationName: 'Main Warehouse',
     receivedDate: '2025-04-08',
     status: 'available',
+    location: 'Main Warehouse' // Added required location property
   },
   { 
     id: 'stock-005', 
@@ -118,6 +123,7 @@ const mockInventoryStock: InventoryStockItem[] = [
     locationName: 'Main Warehouse',
     receivedDate: '2025-04-01',
     status: 'available',
+    location: 'Main Warehouse' // Added required location property
   },
 ];
 
@@ -269,6 +275,66 @@ const mockTransfers: InventoryTransfer[] = [
   },
 ];
 
+// Create the TransfersTable component that was missing
+interface TransfersTableProps {
+  transfers: InventoryTransfer[];
+  onViewTransfer: (transfer: InventoryTransfer) => void;
+}
+
+const TransfersTable: React.FC<TransfersTableProps> = ({ transfers, onViewTransfer }) => {
+  return (
+    <div className="border rounded-md overflow-hidden">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Transfer ID</TableHead>
+            <TableHead>Date</TableHead>
+            <TableHead>From</TableHead>
+            <TableHead>To</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead className="text-right">Items</TableHead>
+            <TableHead className="w-[100px]"></TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {transfers.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={7} className="text-center py-6 text-muted-foreground">
+                No transfer requests found.
+              </TableCell>
+            </TableRow>
+          ) : (
+            transfers.map((transfer) => (
+              <TableRow key={transfer.id}>
+                <TableCell className="font-medium">{transfer.id}</TableCell>
+                <TableCell>{formatDate(transfer.date)}</TableCell>
+                <TableCell>{transfer.fromLocationName}</TableCell>
+                <TableCell>{transfer.toLocationName}</TableCell>
+                <TableCell>
+                  <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${
+                    transfer.status === 'completed' ? 'bg-green-100 text-green-800' : 
+                    transfer.status === 'in_progress' ? 'bg-amber-100 text-amber-800' : 
+                    'bg-blue-100 text-blue-800'
+                  }`}>
+                    {transfer.status === 'completed' ? 'Completed' : 
+                     transfer.status === 'in_progress' ? 'In Progress' : 'Pending'}
+                  </span>
+                </TableCell>
+                <TableCell className="text-right">{transfer.items.length}</TableCell>
+                <TableCell>
+                  <Button variant="ghost" size="sm" onClick={() => onViewTransfer(transfer)}>
+                    View
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))
+          )}
+        </TableBody>
+      </Table>
+    </div>
+  );
+};
+
 const InventoryTransfers = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [transfers, setTransfers] = useState<InventoryTransfer[]>(mockTransfers);
@@ -345,7 +411,7 @@ const InventoryTransfers = () => {
     return items.map(item => {
       // Find corresponding inventory item
       const inventoryItem = mockInventoryStock.find(
-        stock => stock.inventoryItemId === item.inventoryItemId || stock.id === item.inventoryItemId
+        stock => stock.id === item.inventoryItemId
       );
       
       const available = inventoryItem ? inventoryItem.currentStock : 0;
@@ -873,3 +939,4 @@ const InventoryTransfers = () => {
 };
 
 export default InventoryTransfers;
+
