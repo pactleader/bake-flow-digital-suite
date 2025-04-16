@@ -108,3 +108,86 @@ export interface TimeFilterOption {
   label: string;
   value: string;
 }
+
+export interface VendorOrder {
+  id: string;
+  vendorId: string;
+  vendorName: string;
+  orderNumber: string;
+  orderDate: string;
+  expectedArrival: string;
+  items: VendorOrderItem[];
+  status: 'pending' | 'received' | 'partial' | 'cancelled';
+  totalAmount: number;
+}
+
+export interface VendorOrderItem {
+  inventoryItemId: string;
+  name: string;
+  quantity: number;
+  quantityReceived?: number;
+  unit: string;
+  unitPrice: number;
+  status?: 'pending' | 'received' | 'damaged' | 'missing';
+}
+
+export interface WarehouseLocation {
+  id: string;
+  name: string;
+  barcode: string;
+  description?: string;
+}
+
+export interface InventoryStockItem extends InventoryItem {
+  locationId: string;
+  locationName: string;
+  batchId?: string;
+  expiryDate?: string;
+  receivedDate: string;
+  status: 'available' | 'allocated' | 'holding' | 'transferred';
+}
+
+export interface InventoryTransfer {
+  id: string;
+  fromLocationId: string;
+  fromLocationName: string;
+  toLocationId: string;
+  toLocationName: string;
+  date: string;
+  status: 'pending' | 'in_progress' | 'completed';
+  items: InventoryTransferItem[];
+  ordersLinked?: string[];
+}
+
+export interface InventoryTransferItem {
+  inventoryItemId: string;
+  name: string;
+  quantity: number;
+  unit: string;
+  status: 'pending' | 'picked' | 'transferred';
+  stockItems?: InventoryStockItem[];
+}
+
+export interface BakerProduction {
+  id: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  status: OrderItemStatus;
+  startTime: string;
+  completedTime?: string;
+  assignedTo: string;
+  notes?: string;
+}
+
+export interface DeliveryRoute {
+  id: string;
+  driverId: string;
+  driverName: string;
+  date: string;
+  status: 'pending' | 'in_progress' | 'completed';
+  orders: Order[];
+  optimizedWaypoints?: any[];
+  totalDistance?: number;
+  estimatedTime?: number;
+}

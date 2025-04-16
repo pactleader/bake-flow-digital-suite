@@ -12,6 +12,12 @@ import Clients from "./pages/Clients";
 import Inventory from "./pages/Inventory";
 import Vendors from "./pages/Vendors";
 import NotFound from "./pages/NotFound";
+import Baker from "./pages/Baker";
+import InventoryReceiving from "./pages/InventoryReceiving";
+import Warehouse from "./pages/Warehouse";
+import InventoryTransfers from "./pages/InventoryTransfers";
+import Bagging from "./pages/Bagging";
+import Delivery from "./pages/Delivery";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +35,12 @@ const App = () => (
           <Route path="/clients" element={<Clients />} />
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/vendors" element={<Vendors />} />
+          <Route path="/baker" element={<Baker />} />
+          <Route path="/inventory-receiving" element={<InventoryReceiving />} />
+          <Route path="/warehouse" element={<Warehouse />} />
+          <Route path="/inventory-transfers" element={<InventoryTransfers />} />
+          <Route path="/bagging" element={<Bagging />} />
+          <Route path="/delivery" element={<Delivery />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
