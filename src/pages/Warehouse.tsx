@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Header } from '@/components/Header';
 import { Sidebar } from '@/components/Sidebar';
@@ -345,7 +346,7 @@ const Warehouse = () => {
                   <SelectValue placeholder="All locations" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All locations</SelectItem>
+                  <SelectItem value="all-locations">All locations</SelectItem>
                   {locations.map((location) => (
                     <SelectItem key={location.id} value={location.id}>
                       {location.name}
@@ -359,7 +360,7 @@ const Warehouse = () => {
                   <SelectValue placeholder="All categories" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All categories</SelectItem>
+                  <SelectItem value="all-categories">All categories</SelectItem>
                   {categories.map((category) => (
                     <SelectItem key={category} value={category}>
                       {category}
