@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,6 +17,7 @@ import Warehouse from "./pages/Warehouse";
 import InventoryTransfers from "./pages/InventoryTransfers";
 import Bagging from "./pages/Bagging";
 import Delivery from "./pages/Delivery";
+import Reports from "./pages/Reports";
 
 const queryClient = new QueryClient();
 
@@ -41,7 +41,7 @@ const App = () => (
           <Route path="/inventory-transfers" element={<InventoryTransfers />} />
           <Route path="/bagging" element={<Bagging />} />
           <Route path="/delivery" element={<Delivery />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/reports" element={<Reports />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
