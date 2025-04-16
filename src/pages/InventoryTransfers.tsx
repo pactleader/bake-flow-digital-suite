@@ -855,4 +855,21 @@ const InventoryTransfers = () => {
                   {selectedTransfer.status !== 'completed' && (
                     <div className="flex gap-2">
                       <Button size="sm" variant="outline">
-                        <FileText size={16} className="mr-1"
+                        <FileCheck className="h-4 w-4" /> Mark Picked
+                      </Button>
+                      <Button size="sm" variant="outline">
+                        <ArrowRight className="h-4 w-4" /> Mark Transferred
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+        </SheetContent>
+      </Sheet>
+    </div>
+  );
+};
+
+export default InventoryTransfers;
