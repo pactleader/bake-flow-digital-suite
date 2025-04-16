@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Header } from '@/components/Header';
 import { Sidebar } from '@/components/Sidebar';
@@ -11,6 +10,7 @@ import { Client } from '@/types';
 import { clients, orders } from '@/data/mockData';
 import { formatCurrency } from '@/lib/utils';
 import { useToast } from "@/components/ui/use-toast";
+import { StatusBadge } from '@/components/StatusBadge';
 
 const Clients = () => {
   const [searchTerm, setSearchTerm] = useState('');
