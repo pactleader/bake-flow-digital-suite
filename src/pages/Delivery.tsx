@@ -367,7 +367,7 @@ const Delivery = () => {
                   <SelectValue placeholder="All drivers" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All drivers</SelectItem>
+                  <SelectItem value="all">All drivers</SelectItem>
                   <SelectItem value="driver-001">David Miller</SelectItem>
                   <SelectItem value="driver-002">Susan Taylor</SelectItem>
                 </SelectContent>
